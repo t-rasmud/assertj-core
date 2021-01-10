@@ -12,16 +12,15 @@
  */
 package org.assertj.core.util;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import org.assertj.core.presentation.Representation;
 import org.assertj.core.presentation.StandardRepresentation;
+
+import org.checkerframework.checker.determinism.qual.*;
 
 /**
  * Utility methods related to maps.
@@ -85,11 +84,11 @@ public class Maps {
    * @param map the map to format.
    * @return the {@code String} representation of the given map.
    */
-  public static String format(Representation p, Map<?, ?> map) {
+  public static String format(Representation p, @PolyDet Map<? extends @PolyDet Object, ? extends @PolyDet Object> map) {
     if (map == null) {
       return null;
     }
-    Iterator<?> i = map.entrySet().iterator();
+    @Det Iterator<? extends @Det Object> i = map.entrySet().iterator();
     if (!i.hasNext()) {
       return "{}";
     }
